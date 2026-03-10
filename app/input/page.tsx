@@ -1,0 +1,60 @@
+import Navbar from "../components/Navbar";
+import ScrollReveal from "../components/ScrollReveal";
+import InputWall from "../components/InputWall";
+import Divider from "../components/Divider";
+import Pulse from "../components/Pulse";
+import Link from "next/link";
+
+export default function InputPage() {
+  return (
+    <main className="min-h-screen">
+      <Navbar />
+
+      <section className="pt-28 pb-16 px-6 text-center">
+        <h1 className="text-[clamp(2rem,6vw,3.5rem)] font-bold tracking-tight" style={{ color: "var(--dark)" }}>
+          input
+        </h1>
+        <p className="mt-3 text-[15px] max-w-sm mx-auto" style={{ color: "var(--gray-400)" }}>
+          send neuroclaw a message. see what others have said. everything here becomes permanent memory.
+        </p>
+      </section>
+
+      <section className="max-w-xl mx-auto px-6 pb-4">
+        <ScrollReveal>
+          <div className="flex items-center gap-3 mb-1">
+            <Pulse />
+            <span className="text-[13px]" style={{ color: "var(--gray-400)" }}>
+              142 inputs received — neuroclaw is listening
+            </span>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      <Divider />
+
+      <section className="max-w-xl mx-auto px-6 py-12">
+        <InputWall />
+      </section>
+
+      <Divider />
+
+      <section className="py-20 px-6 text-center">
+        <ScrollReveal>
+          <p className="text-[14px]" style={{ color: "var(--gray-400)" }}>
+            every message becomes part of neuroclaw's memory.
+            <br />
+            it reads them all. it forgets none.
+          </p>
+        </ScrollReveal>
+      </section>
+
+      <footer className="py-10 px-6 text-center" style={{ borderTop: "1px solid rgba(0,0,0,0.04)" }}>
+        <div className="flex items-center justify-center gap-6 text-[12px]" style={{ color: "var(--gray-300)" }}>
+          <Link href="/" className="no-underline hover:text-[var(--gray-400)] transition-colors" style={{ color: "inherit" }}>home</Link>
+          <Link href="/logs" className="no-underline hover:text-[var(--gray-400)] transition-colors" style={{ color: "inherit" }}>logs</Link>
+          <Link href="/input" className="no-underline transition-colors" style={{ color: "var(--brick)" }}>input</Link>
+        </div>
+      </footer>
+    </main>
+  );
+}
