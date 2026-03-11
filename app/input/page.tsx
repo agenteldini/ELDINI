@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import ScrollReveal from "../components/ScrollReveal";
 import InputWall from "../components/InputWall";
@@ -6,6 +9,21 @@ import Pulse from "../components/Pulse";
 import Link from "next/link";
 
 export default function InputPage() {
+  const [inputCount, setInputCount] = useState(0);
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const res = await fetch("/api/stats");
+        if (res.ok) {
+          const data = await res.json();
+          setInputCount(data.total_inputs);
+        }
+      } catch {}
+    }
+    load();
+  }, []);
+
   return (
     <main className="min-h-screen">
       <Navbar />
@@ -24,7 +42,7 @@ export default function InputPage() {
           <div className="flex items-center gap-3 mb-1">
             <Pulse />
             <span className="text-[13px]" style={{ color: "var(--gray-400)" }}>
-              142 inputs received — neuroclaw is listening
+              {inputCount} inputs received — neuroclaw is listening
             </span>
           </div>
         </ScrollReveal>
