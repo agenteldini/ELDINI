@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/agent/think",
-      "schedule": "*/30 * * * *"
+      "schedule": "0 12 * * *"
     }
   ]
 }
