@@ -31,7 +31,11 @@ async function callGPT(messages: { role: string; content: string }[]): Promise<s
   }
 
   const data = await res.json();
-  return data.choices?.[0]?.message?.content || data.choices?.[0]?.delta?.content || "";
+  const content = data.choices?.[0]?.message?.content || data.choices?.[0]?.delta?.content || "";
+  if (!content) {
+    throw new Error(`kie.ai returned no content. Full response: ${JSON.stringify(data).slice(0, 500)}`);
+  }
+  return content;
 }
 
 export async function think() {
