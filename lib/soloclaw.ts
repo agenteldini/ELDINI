@@ -165,10 +165,9 @@ async function addLiquidity(
     const tokenAmount = BigInt(tokenInfo.value.amount);
     if (tokenAmount === BigInt(0)) return 0;
 
-    const depositSolBn = new BN(depositSolLamports);
-    const liquidityState = await onlineAmm.depositSolanaState(poolPda, keypair.publicKey, ata);
+    const liquidityState = await onlineAmm.liquiditySolanaState(poolPda, keypair.publicKey, ata);
     const lpToken = new BN(tokenAmount.toString());
-    const depositIx = await onlineAmm.depositInstructions(liquidityState, lpToken, depositSolBn, 5);
+    const depositIx = await onlineAmm.depositInstructions(liquidityState, lpToken, 5);
     appendV2Account(depositIx, PUMP_AMM_PROGRAM_ID, poolV2Pda(mint));
     const depositTx = new Transaction().add(...depositIx);
     const depositSig = await sendTx(connection, depositTx, keypair);
