@@ -50,3 +50,20 @@ create policy "logs are public" on logs for select using (true);
 create policy "inputs are public" on inputs for select using (true);
 create policy "anyone can send input" on inputs for insert with check (true);
 create policy "agent_state is public" on agent_state for select using (true);
+create policy "memories are public" on memories for select using (true);
+
+-- SoloClaw on-chain stats
+create table if not exists agent_stats (
+  id text primary key default 'default',
+  total_claimed numeric default 0,
+  total_bought_back numeric default 0,
+  total_burned text default '0',
+  last_run_at timestamptz,
+  transactions jsonb default '[]',
+  updated_at timestamptz default now()
+);
+
+insert into agent_stats (id) values ('default') on conflict do nothing;
+
+alter table agent_stats enable row level security;
+create policy "agent_stats are public" on agent_stats for select using (true);

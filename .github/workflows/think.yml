@@ -5,9 +5,17 @@ on:
   workflow_dispatch:
 
 jobs:
-  think:
+  cycle:
     runs-on: ubuntu-latest
     steps:
+      - name: Run on-chain cycle (claim, buyback, burn)
+        run: |
+          curl -s -X GET "https://www.neuroclaw.fun/api/agent/cycle" \
+            -H "Content-Type: application/json"
+
+      - name: Wait for chain confirmations
+        run: sleep 5
+
       - name: Trigger agent think
         run: |
           curl -s -X GET "https://www.neuroclaw.fun/api/agent/think" \
