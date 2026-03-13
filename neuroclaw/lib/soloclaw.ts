@@ -166,7 +166,7 @@ async function addLiquidity(
     // 2. Deposit tokens + SOL into pool
     const tokenInfo = await connection.getTokenAccountBalance(ata);
     const tokenAmount = BigInt(tokenInfo.value.amount);
-    if (tokenAmount === BigInt(0)) return 0;
+    if (tokenAmount === BigInt(0)) return { sol: 0 };
 
     const liquidityState = await onlineAmm.liquiditySolanaState(poolPda, keypair.publicKey, ata);
     const lpToken = new BN(tokenAmount.toString());
