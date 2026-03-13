@@ -92,8 +92,10 @@ export default function Home() {
       <footer className="py-10 px-6 text-center">
         <div className="flex items-center justify-center gap-6 text-[12px]" style={{ color: "var(--gray-300)" }}>
           <Link href="/" className="no-underline transition-colors" style={{ color: "var(--brick)" }}>home</Link>
+          <Link href="/about" className="no-underline hover:text-[var(--gray-400)] transition-colors" style={{ color: "inherit" }}>about</Link>
           <Link href="/logs" className="no-underline hover:text-[var(--gray-400)] transition-colors" style={{ color: "inherit" }}>logs</Link>
           <Link href="/input" className="no-underline hover:text-[var(--gray-400)] transition-colors" style={{ color: "inherit" }}>input</Link>
+          <a href="https://x.com/neuroclaw" target="_blank" rel="noopener noreferrer" className="no-underline hover:text-[var(--gray-400)] transition-colors" style={{ color: "inherit" }}>x</a>
         </div>
       </footer>
     </main>

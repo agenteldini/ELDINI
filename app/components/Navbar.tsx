@@ -7,8 +7,10 @@ import Pulse from "./Pulse";
 
 const NAV_ITEMS = [
   { href: "/", label: "home" },
+  { href: "/about", label: "about" },
   { href: "/logs", label: "logs" },
   { href: "/input", label: "input" },
+  { href: "https://x.com/neuroclaw", label: "x", external: true },
 ];
 
 export default function Navbar() {
@@ -27,16 +29,29 @@ export default function Navbar() {
       </Link>
 
       <div className="flex items-center gap-6">
-        {NAV_ITEMS.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className="text-[13px] no-underline transition-colors hidden sm:inline"
-            style={{ color: path === item.href ? "var(--brick)" : "var(--gray-400)" }}
-          >
-            {item.label}
-          </Link>
-        ))}
+        {NAV_ITEMS.map((item) =>
+          "external" in item && item.external ? (
+            <a
+              key={item.href}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[13px] no-underline transition-colors hidden sm:inline"
+              style={{ color: "var(--gray-400)" }}
+            >
+              {item.label}
+            </a>
+          ) : (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-[13px] no-underline transition-colors hidden sm:inline"
+              style={{ color: path === item.href ? "var(--brick)" : "var(--gray-400)" }}
+            >
+              {item.label}
+            </Link>
+          )
+        )}
         <div className="flex items-center gap-2">
           <Pulse />
           <span className="text-[13px]" style={{ color: "var(--gray-400)" }}>
