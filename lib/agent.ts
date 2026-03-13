@@ -1,7 +1,11 @@
 import OpenAI from "openai";
 import { getSupabaseAdmin } from "./supabase";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+let _openai: OpenAI | null = null;
+function getOpenAI() {
+  if (!_openai) _openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  return _openai;
+}
 
 function getDayNumber(bornAt: string): number {
   const born = new Date(bornAt);
@@ -79,7 +83,7 @@ ${logsContext || "(this is your first thought)"}
 
 Think. What's on your mind? Write your log entry.`;
 
-  const response = await openai.chat.completions.create({
+  const response = await getOpenAI().chat.completions.create({
     model: "gpt-4o-mini",
     messages: [
       { role: "system", content: systemPrompt },
